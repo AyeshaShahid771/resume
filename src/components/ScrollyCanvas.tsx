@@ -31,10 +31,10 @@ export default function ScrollyCanvas({
     offset: ["start start", "end end"],
   });
 
-  // Tighter spring for more responsive "snappy" feel
+  // Smooth spring for better animation visibility (less snappy)
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 200,
-    damping: 35,
+    stiffness: 120,
+    damping: 50,
     restDelta: 0.0001,
   });
 

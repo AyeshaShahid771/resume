@@ -132,7 +132,7 @@ export default function Identity() {
                 className="group relative p-[1px] rounded-full overflow-hidden transition-all duration-500 hover:scale-[1.05]"
               >
                 {/* Always-on Flowing Perimeter Beam */}
-                <div className="absolute inset-[-1000%] opacity-100 animate-[spin_4s_linear_infinite] bg-[conic-gradient(from_0deg,transparent_0_70%,#64b4ff_100%)] pointer-events-none" />
+                <div className="absolute inset-[-1000%] opacity-100 animate-[spin_4s_linear_infinite] bg-[conic-gradient(from_0deg,transparent_0_70%,#64b4ff_100%)] pointer-events-none will-change-transform" />
                 
                 <div className="relative px-6 py-2 rounded-full bg-[#121212] border border-white/5 font-syne text-[9px] md:text-[10px] tracking-widest uppercase flex items-center justify-center transition-all duration-500 group-hover:bg-[#121212] shadow-[0_0_15px_rgba(100,180,255,0.05)] group-hover:shadow-[0_0_25px_rgba(100,180,255,0.15)]">
                   <span className="text-white/40 group-hover:text-white transition-colors duration-500 whitespace-nowrap">

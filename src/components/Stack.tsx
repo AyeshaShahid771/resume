@@ -126,7 +126,7 @@ export default function Stack() {
   const finalDuration = Math.max(normalizedDuration, minDuration);
 
   return (
-    <section id="stack" className="py-32 bg-[#121212] relative z-40 overflow-hidden">
+    <section id="stack" className="py-32 relative z-40 overflow-hidden">
       {/* Localized Atmospheric Glows */}
       <div className="absolute inset-0 pointer-events-none mix-blend-screen -z-10">
         <div className="absolute top-[-20%] left-[-10%] w-[70%] h-[70%] bg-blue-600/10 blur-[150px] rounded-full animate-pulse" />

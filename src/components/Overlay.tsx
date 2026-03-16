@@ -10,27 +10,28 @@ export default function Overlay({ scrollTarget }: OverlayProps) {
   const { scrollYProgress } = useScroll({
     target: scrollTarget,
     offset: ["start start", "end end"],
+    layout: "position", // Ensures proper scroll calculation on prod
   });
 
-  // Phase 1: Editorial Hero (0% to 30%) - VISIBLE FROM START
-  const opacityHero = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
-  const yHero = useTransform(scrollYProgress, [0, 0.3], ["0vh", "-10vh"]);
+  // Phase 1: Editorial Hero (0% to 28%)
+  const opacityHero = useTransform(scrollYProgress, [0, 0.28], [1, 0]);
+  const yHero = useTransform(scrollYProgress, [0, 0.28], ["0vh", "-10vh"]);
 
-  // Phase 2: RAG Focus (25% to 65%) - SHOWS AFTER PHASE 1
+  // Phase 2: RAG Focus (24% to 62%)
   const opacity2 = useTransform(
     scrollYProgress,
-    [0.25, 0.3, 0.6, 0.65],
+    [0.24, 0.28, 0.58, 0.62],
     [0, 1, 1, 0],
   );
-  const x2 = useTransform(scrollYProgress, [0.25, 0.65], [20, 0]);
+  const x2 = useTransform(scrollYProgress, [0.24, 0.62], [20, 0]);
 
-  // Phase 3: Engineering Prowess (60% to 100%) - SHOWS AFTER PHASE 2
+  // Phase 3: Engineering Prowess (58% to 100%)
   const opacity3 = useTransform(
     scrollYProgress,
-    [0.6, 0.65, 0.95, 1],
+    [0.58, 0.63, 0.95, 1],
     [0, 1, 1, 0],
   );
-  const x3 = useTransform(scrollYProgress, [0.6, 1], [-20, 0]);
+  const x3 = useTransform(scrollYProgress, [0.58, 1], [-20, 0]);
 
   return (
     <div className="pointer-events-none absolute inset-0 z-10 overflow-hidden text-white">

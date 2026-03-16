@@ -17,6 +17,7 @@ export default function ScrollyCanvas({
   const imagesRef = useRef<HTMLImageElement[]>([]);
   const lastRenderedIndex = useRef<number>(-1);
   const [imagesLoaded, setImagesLoaded] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
   // Pre-calculated dimensions to avoid math in render loop
   const layoutRef = useRef({
@@ -90,6 +91,11 @@ export default function ScrollyCanvas({
   }, []);
 
   useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isMounted) return;
     let loadedCount = 0;
     const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
 
@@ -112,7 +118,7 @@ export default function ScrollyCanvas({
       }
     };
     preloadImages();
-  }, [totalFrames]);
+  }, [totalFrames, isMounted]);
 
   useEffect(() => {
     if (!imagesLoaded || !canvasRef.current) return;
@@ -156,7 +162,10 @@ export default function ScrollyCanvas({
   }, [imagesLoaded, frameIndex, renderFrame, updateLayout]);
 
   return (
-    <div ref={containerRef} className="relative h-[300vh] w-full bg-[#121212]">
+    <div
+      ref={containerRef}
+      className="relative h-[180vh] sm:h-[240vh] md:h-[300vh] w-full bg-[#121212]"
+    >
       <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center will-change-transform">
         <canvas
           ref={canvasRef}

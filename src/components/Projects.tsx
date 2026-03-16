@@ -114,25 +114,21 @@ export default function Projects() {
 
   const indexValue = useTransform(
     scrollYProgress,
-    [0, 0.2, 0.4, 0.6, 0.8, 1],
-    [0, 1, 2, 3, 4, 4],
+    [0, 0.1, 0.15, 0.3, 0.35, 0.5, 0.55, 0.7, 0.75, 0.9, 0.95, 1],
+    [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 4, 4],
   );
 
   useMotionValueEvent(indexValue, "change", (latest) => {
-    const rounded = Math.round(latest);
-    if (rounded !== activeIndex) {
-      setActiveIndex(rounded);
+    const floor = Math.floor(latest);
+    if (floor !== activeIndex) {
+      setActiveIndex(floor);
     }
   });
 
   const activeProject = projects[activeIndex];
 
   return (
-    <section
-      id="work"
-      ref={containerRef}
-      className="relative z-20"
-    >
+    <section id="work" className="relative z-20">
       {/* Dynamic Background Sync handled by page-level BackgroundGlows */}
 
       {/* Title Section */}
@@ -156,7 +152,7 @@ export default function Projects() {
       </div>
 
       {/* Unified Sticky Wrapper */}
-      <div className="relative h-[450vh] md:h-[380vh]">
+      <div ref={containerRef} className="relative h-[400vh] md:h-[500vh]">
         <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col md:grid md:grid-cols-2">
           {/* Scroll Indicator (Desktop Only) */}
           <div className="hidden md:flex absolute left-6 top-1/2 -translate-y-1/2 flex-col items-center gap-4 z-20">
@@ -178,14 +174,14 @@ export default function Projects() {
 
           {/* LEFT SIDE - Text Panel */}
           <div className="flex-1 px-6 md:pl-[clamp(60px,10vw,140px)] md:pr-[clamp(20px,5vw,60px)] flex flex-col justify-center order-2 md:order-1 pt-4 md:pt-0">
-            <AnimatePresence mode="wait">
+            <AnimatePresence mode="popLayout">
               <motion.div
                 key={activeProject.id}
                 initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
                 animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                 exit={{ opacity: 0, y: -30, filter: "blur(8px)" }}
                 transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
-                className="max-w-[520px]"
+                className="max-w-[520px] pb-12 md:pb-0"
               >
                 <p
                   className="font-syne uppercase text-[9px] md:text-[10px] tracking-[0.2em] mb-2 md:mb-3"
@@ -271,6 +267,9 @@ export default function Projects() {
           </div>
         </div>
       </div>
+
+      {/* Bottom Smudge Transition */}
+      <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#0a1120] to-transparent pointer-events-none z-30" />
     </section>
   );
 }

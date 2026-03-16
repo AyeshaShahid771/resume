@@ -10,7 +10,7 @@ function AcademicBlock({ items }: { items: any[] }) {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
       viewport={{ once: true }}
-      className="p-6 md:p-10 rounded-3xl bg-white/5 border border-white/10 hover:border-blue-400/20 transition-all flex flex-col gap-8 md:gap-10"
+      className="p-6 md:p-10 rounded-3xl bg-white/5 border border-white/10 hover:border-blue-400/20 transition-all flex flex-col gap-8 md:gap-10 h-full"
     >
       <div className="border-b border-white/5 pb-6">
         <h3 className="font-syne text-[11px] uppercase tracking-[0.4em] text-white/30">Academic Foundations</h3>
@@ -68,8 +68,7 @@ export default function Education() {
   ];
 
   return (
-    <section id="education" className="py-24 bg-[#121212] relative">
-      <BackgroundGlows />
+    <section id="education" className="py-24 relative">
       
       <div className="px-6 md:px-12 mb-16 relative z-10">
         <motion.p
@@ -89,15 +88,39 @@ export default function Education() {
       </div>
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col lg:flex-row gap-12 relative z-10 items-stretch">
-        {/* LEFT: Education Box */}
-        <div className="flex-1">
-          <AcademicBlock items={academicItems} />
+        {/* LEFT: Education */}
+        <div className="flex-1 flex flex-col gap-6">
+          <div className="pb-4">
+            <h3 className="font-syne text-[11px] uppercase tracking-[0.4em] text-white/20">Academic Foundations</h3>
+          </div>
+          {academicItems.map((item, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: i * 0.1 }}
+              viewport={{ once: true }}
+              className="p-6 md:p-10 rounded-3xl bg-white/5 border border-white/10 hover:border-blue-400/20 transition-all flex flex-col gap-6 h-full"
+            >
+              <div className="flex justify-between items-start">
+                <span className="font-syne text-[10px] uppercase tracking-widest text-blue-400">{item.institution}</span>
+                <span className="font-syne text-[9px] uppercase tracking-widest text-white/20">{item.period}</span>
+              </div>
+              <div>
+                <h4 className="font-playfair italic text-2xl md:text-3xl text-white mb-2">{item.title}</h4>
+                {item.metric && <p className="font-syne text-[10px] uppercase tracking-widest text-white/40">{item.metric}</p>}
+              </div>
+              <p className="font-syne text-[11px] text-white/50 leading-relaxed max-w-[400px]">
+                {item.description}
+              </p>
+            </motion.div>
+          ))}
         </div>
 
         {/* RIGHT: Certifications */}
         <div className="flex-1 flex flex-col gap-6">
           <div className="pb-4">
-             <h3 className="font-syne text-[11px] uppercase tracking-[0.4em] text-white/20">Professional Certifications</h3>
+            <h3 className="font-syne text-[11px] uppercase tracking-[0.4em] text-white/20">Professional Certifications</h3>
           </div>
           {certificationItems.map((cert, i) => (
             <motion.div
@@ -106,7 +129,7 @@ export default function Education() {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: i * 0.1 }}
               viewport={{ once: true }}
-              className="p-6 md:p-10 rounded-3xl bg-white/5 border border-white/10 hover:border-purple-400/20 transition-all flex flex-col gap-6"
+              className="p-6 md:p-10 rounded-3xl bg-white/5 border border-white/10 hover:border-purple-400/20 transition-all flex flex-col gap-6 h-full"
             >
               <div className="flex justify-between items-start">
                 <span className="font-syne text-[10px] uppercase tracking-widest text-purple-400">{cert.institution}</span>

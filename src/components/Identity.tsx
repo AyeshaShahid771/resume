@@ -83,7 +83,7 @@ export default function Identity() {
   return (
     <section
       id="about"
-      className="py-24 md:py-[20vh] border-t border-white/5 relative z-30"
+      className="py-24 md:py-[20vh] relative z-30"
     >
       <div className="max-w-7xl mx-auto px-6 md:px-12 grid md:grid-cols-2 gap-12 md:gap-20 items-center relative z-10">
         {/* LEFT: Statement */}

@@ -17,7 +17,7 @@ const experiences = [
       "Client requirements → technical specs",
     ],
     accent: "rgba(100,180,255,1)",
-    side: "right",
+    side: "left",
     badge: "CURRENT ROLE",
   },
   {
@@ -30,7 +30,7 @@ const experiences = [
       "Dockerized scalable cloud delivery",
     ],
     accent: "rgba(167,139,250,1)",
-    side: "left",
+    side: "right",
   },
 ];
 
@@ -45,11 +45,13 @@ function TimelineCard({
 
   return (
     <div
-      className={`relative flex w-full mb-24 justify-center items-center ${isRight ? "md:justify-start md:pl-[50%]" : "md:justify-end md:pr-[50%]"}`}
+      className={`relative flex w-full mb-24 justify-start items-center pl-12 md:pl-0 ${isRight ? "md:flex-row" : "md:flex-row-reverse"}`}
     >
+      {/* Container for card to handle 50% width on desktop */}
+      <div className={`w-full md:w-1/2 flex ${isRight ? "justify-start" : "justify-end"}`}>
       {/* Timeline Dot */}
       <div
-        className="absolute left-1/2 -translate-x-1/2 w-4 h-4 rounded-full z-20 bg-[#121212] border-2 shadow-lg"
+        className="absolute left-6 md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full z-20 bg-[#121212] border-2 shadow-lg"
         style={{ borderColor: exp.accent }}
       >
         {/* Removed infinite animation - now just static glow effect */}
@@ -59,48 +61,49 @@ function TimelineCard({
         />
       </div>
 
-      <motion.div
-        initial={{ opacity: 0, x: isRight ? 100 : -100, scale: 0.9 }}
-        whileInView={{ opacity: 1, x: 0, scale: 1 }}
-        viewport={{ once: true, margin: "-50px", amount: 0.1 }}
-        transition={{ type: "spring", stiffness: 100, damping: 15 }}
-        className={`w-full max-w-[480px] p-6 md:p-8 rounded-2xl bg-white/5 border border-white/10 relative ${isRight ? "md:ml-12" : "md:mr-12"}`}
-      >
-        {exp.badge && (
-          <span className="inline-block px-3 py-1 rounded-full text-[9px] font-syne tracking-widest mb-4 bg-blue-500/10 text-blue-400 border border-blue-500/20">
-            {exp.badge}
-          </span>
-        )}
-
-        <h3 className="font-playfair italic text-3xl text-white mb-2">
-          {exp.company}
-        </h3>
-        <p
-          className="font-syne uppercase text-[11px] tracking-wider mb-6"
-          style={{ color: exp.accent }}
+        <motion.div
+          initial={{ opacity: 0, x: isRight ? 100 : -100, scale: 0.9 }}
+          whileInView={{ opacity: 1, x: 0, scale: 1 }}
+          viewport={{ once: true, margin: "-50px", amount: 0.1 }}
+          transition={{ type: "spring", stiffness: 100, damping: 15 }}
+          className={`w-full max-w-[480px] p-6 md:p-8 rounded-2xl bg-white/5 border border-white/10 relative ${isRight ? "md:ml-12" : "md:mr-12"}`}
         >
-          {exp.role}
-        </p>
+          {exp.badge && (
+            <span className="inline-block px-3 py-1 rounded-full text-[9px] font-syne tracking-widest mb-4 bg-blue-500/10 text-blue-400 border border-blue-500/20">
+              {exp.badge}
+            </span>
+          )}
 
-        <div className="flex justify-between text-[11px] font-syne text-white/30 tracking-widest uppercase mb-6">
-          <span>{exp.period}</span>
-          <span>{exp.location}</span>
-        </div>
+          <h3 className="font-playfair italic text-3xl text-white mb-2">
+            {exp.company}
+          </h3>
+          <p
+            className="font-syne uppercase text-[11px] tracking-wider mb-6"
+            style={{ color: exp.accent }}
+          >
+            {exp.role}
+          </p>
 
-        <ul className="space-y-3">
-          {exp.points.map((point, i) => (
-            <li
-              key={i}
-              className="flex gap-3 text-sm text-white/50 leading-relaxed group"
-            >
-              <span className="text-white/20 transition-colors group-hover:text-blue-400">
-                →
-              </span>
-              {point}
-            </li>
-          ))}
-        </ul>
-      </motion.div>
+          <div className="flex flex-col sm:flex-row sm:justify-between gap-2 text-[11px] font-syne text-white/30 tracking-widest uppercase mb-6">
+            <span>{exp.period}</span>
+            <span>{exp.location}</span>
+          </div>
+
+          <ul className="space-y-3">
+            {exp.points.map((point, i) => (
+              <li
+                key={i}
+                className="flex gap-3 text-sm text-white/50 leading-relaxed group"
+              >
+                <span className="text-white/20 transition-colors group-hover:text-blue-400">
+                  →
+                </span>
+                {point}
+              </li>
+            ))}
+          </ul>
+        </motion.div>
+      </div>
     </div>
   );
 }
@@ -128,9 +131,8 @@ export default function Experience() {
     <section
       id="experience"
       ref={containerRef}
-      className="py-32 bg-[#121212] relative z-50"
+      className="py-32 relative z-50 overflow-hidden"
     >
-      <BackgroundGlows />
       <div className="px-6 md:px-12 mb-20 text-center md:text-left relative z-10">
         <motion.p
           initial={{ opacity: 0, y: 10 }}
@@ -146,13 +148,13 @@ export default function Experience() {
           viewport={{ once: true, amount: 0.1 }}
           className="font-playfair italic text-[clamp(48px,8vw,72px)] text-white leading-none mb-12"
         >
-          Where I've Worked.
+          Where I&apos;ve Worked.
         </motion.h2>
       </div>
 
       <div className="relative max-w-6xl mx-auto px-6">
         {/* Timeline Line */}
-        <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-[2px] bg-white/5 md:block hidden">
+        <div className="absolute left-6 md:left-1/2 -translate-x-1/2 top-0 bottom-0 w-[2px] bg-white/5">
           <motion.div
             style={{ scaleY: pathLength, opacity: pathOpacity }}
             className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-blue-500 via-purple-500 to-cyan-400 origin-top shadow-[0_0_15px_rgba(100,180,255,0.4)]"

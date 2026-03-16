@@ -1,8 +1,6 @@
 "use client";
 
-import { useRef } from "react";
-import ScrollyCanvas from "@/components/ScrollyCanvas";
-import Overlay from "@/components/Overlay";
+import StaticHero from "@/components/StaticHero";
 import Identity from "@/components/Identity";
 import Projects from "@/components/Projects";
 import Stack from "@/components/Stack";
@@ -14,21 +12,19 @@ import Navbar from "@/components/Navbar";
 import BackgroundGlows from "@/components/BackgroundGlows";
 
 export default function Home() {
-  const heroRef = useRef<HTMLDivElement>(null);
-
   return (
-    <main className="relative min-h-screen">
+    <main className="relative min-h-screen w-full">
       <Navbar />
       <BackgroundGlows />
-      {/* Scroll Section */}
-      <section ref={heroRef} className="relative">
-        <ScrollyCanvas totalFrames={75}>
-          <Overlay scrollTarget={heroRef} />
-        </ScrollyCanvas>
-      </section>
+
+      {/* Static Hero Section */}
+      <StaticHero />
 
       {/* Identity Section */}
-      <Identity />
+      <div className="relative">
+        <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-black to-transparent pointer-events-none z-10" />
+        <Identity />
+      </div>
 
       {/* Projects Section */}
       <Projects />

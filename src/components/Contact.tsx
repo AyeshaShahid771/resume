@@ -129,8 +129,7 @@ export default function Contact() {
   const linkedinDisplay = "linkedin.com/in/ayesha-shahid-data-analysts-datascientist/";
 
   return (
-    <section id="contact" className="py-24 bg-[#121212] flex items-center justify-center relative overflow-hidden">
-      <BackgroundGlows />
+    <section id="contact" className="py-24 flex items-center justify-center relative overflow-hidden">
       
       {/* Conic Background Animation */}
       <div className="absolute inset-0 opacity-10 pointer-events-none">

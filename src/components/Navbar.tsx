@@ -35,7 +35,7 @@ export default function Navbar() {
     >
       {/* LEFT: Branding/Logo Placeholder */}
       <div className="font-playfair italic text-xl text-white opacity-80">
-        AS.
+        AYESHA.
       </div>
 
       {/* CENTER: Links */}

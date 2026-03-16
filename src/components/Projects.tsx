@@ -154,79 +154,85 @@ export default function Projects() {
       {/* Unified Sticky Wrapper */}
       <div ref={containerRef} className="relative h-[400vh] md:h-[500vh]">
         <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col md:grid md:grid-cols-2">
-          {/* Scroll Indicator (Desktop Only) */}
-          <div className="hidden md:flex absolute left-6 top-1/2 -translate-y-1/2 flex-col items-center gap-4 z-20">
-            <div className="h-32 w-[1px] bg-white/5 relative overflow-hidden">
-              <motion.div
-                className="absolute top-0 left-0 w-full"
-                style={{
-                  height: "100%",
-                  scaleY: scrollYProgress,
-                  originY: 0,
-                  backgroundColor: activeProject.accent,
-                }}
-              />
-            </div>
-            <span className="font-syne text-[9px] text-white/10 tracking-[0.2em] -rotate-90 origin-center mt-4">
-              {activeProject.id} / 05
-            </span>
-          </div>
-
           {/* LEFT SIDE - Text Panel */}
-          <div className="flex-1 px-6 md:pl-[clamp(60px,10vw,140px)] md:pr-[clamp(20px,5vw,60px)] flex flex-col justify-center order-2 md:order-1 pt-4 md:pt-0">
-            <AnimatePresence mode="popLayout">
-              <motion.div
-                key={activeProject.id}
-                initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
-                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                exit={{ opacity: 0, y: -30, filter: "blur(8px)" }}
-                transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
-                className="max-w-[520px] pb-12 md:pb-0"
-              >
-                <p
-                  className="font-syne uppercase text-[9px] md:text-[10px] tracking-[0.2em] mb-2 md:mb-3"
-                  style={{ color: activeProject.accent }}
+          <div className="flex-1 flex flex-col justify-center order-2 md:order-1 pt-4 md:pt-0 px-8 md:pl-[clamp(80px,12vw,160px)] md:pr-[clamp(20px,5vw,60px)]">
+            <div className="relative w-full max-w-[520px]">
+              {/* Vertical Indicator - Fixed relative to text block for perfect alignment */}
+              <div className="absolute -left-6 md:-left-12 top-1 bottom-0 flex flex-col items-center gap-4 z-20">
+                <div className="h-24 md:h-32 w-[1.5px] bg-white/5 relative overflow-hidden rounded-full">
+                  <motion.div
+                    className="absolute top-0 left-0 w-full"
+                    style={{
+                      height: "100%",
+                      scaleY: scrollYProgress,
+                      originY: 0,
+                      backgroundColor: activeProject.accent,
+                      boxShadow: `0 0 20px 2px ${activeProject.accent}`,
+                    }}
+                  />
+                </div>
+                <span className="font-syne text-[8px] md:text-[9px] text-white/10 tracking-[0.2em] -rotate-90 origin-center mt-6">
+                  {activeProject.id} / 05
+                </span>
+              </div>
+
+              <AnimatePresence mode="popLayout">
+                <motion.div
+                  key={activeProject.id}
+                  initial={{ opacity: 0, y: 40, filter: "blur(12px)" }}
+                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  exit={{ opacity: 0, y: -40, filter: "blur(12px)" }}
+                  transition={{
+                    duration: 0.8,
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
+                  className="w-full"
                 >
-                  {activeProject.category}
-                </p>
-                <h3 className="font-playfair italic text-[28px] md:text-[clamp(36px,5vw,58px)] text-white leading-[1.1] mb-2">
-                  {activeProject.name}
-                </h3>
-                <p className="font-syne uppercase text-[10px] md:text-[11px] text-white/35 tracking-[0.15em] mb-4 md:mb-6">
-                  {activeProject.oneliner}
-                </p>
+                  <p
+                    className="font-syne uppercase text-[9px] md:text-[10px] tracking-[0.2em] mb-2 md:mb-3"
+                    style={{ color: activeProject.accent }}
+                  >
+                    {activeProject.category}
+                  </p>
+                  <h3 className="font-playfair italic text-[28px] md:text-[clamp(36px,5vw,58px)] text-white leading-[1.1] mb-2">
+                    {activeProject.name}
+                  </h3>
+                  <p className="font-syne uppercase text-[10px] md:text-[11px] text-white/35 tracking-[0.15em] mb-4 md:mb-6">
+                    {activeProject.oneliner}
+                  </p>
 
-                <div className="hidden md:block w-10 h-[1px] bg-white/20 mb-6" />
+                  <div className="hidden md:block w-10 h-[1px] bg-white/20 mb-6" />
 
-                <p className="font-inter text-[13px] md:text-[15px] text-white/55 leading-[1.6] md:leading-[1.7] mb-6 md:mb-8 line-clamp-3 md:line-clamp-none">
-                  {activeProject.description}
-                </p>
+                  <p className="font-inter text-[13px] md:text-[15px] text-white/55 leading-[1.6] md:leading-[1.7] mb-6 md:mb-8 line-clamp-3 md:line-clamp-none">
+                    {activeProject.description}
+                  </p>
 
-                <div className="grid grid-cols-2 gap-y-4 md:gap-y-6 gap-x-4 mb-6 md:mb-8">
-                  {activeProject.stats.map((stat, i) => (
-                    <div key={i} className="flex flex-col">
-                      <span className="font-playfair italic text-xl md:text-2xl text-white">
-                        {stat.value}
+                  <div className="grid grid-cols-2 gap-y-4 md:gap-y-6 gap-x-4 mb-6 md:mb-8">
+                    {activeProject.stats.map((stat, i) => (
+                      <div key={i} className="flex flex-col">
+                        <span className="font-playfair italic text-xl md:text-2xl text-white">
+                          {stat.value}
+                        </span>
+                        <span className="font-syne text-[8px] md:text-[9px] uppercase tracking-wider text-white/40">
+                          {stat.label}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="flex flex-wrap gap-2">
+                    {activeProject.stack.map((tech) => (
+                      <span
+                        key={tech}
+                        className="px-3 py-1 rounded-full border border-white/10 font-syne text-[8px] md:text-[10px] text-white/60 bg-white/5"
+                      >
+                        {tech}
                       </span>
-                      <span className="font-syne text-[8px] md:text-[9px] uppercase tracking-wider text-white/40">
-                        {stat.label}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="flex flex-wrap gap-2">
-                  {activeProject.stack.map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-3 py-1 rounded-full border border-white/10 font-syne text-[8px] md:text-[10px] text-white/60 bg-white/5"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
-            </AnimatePresence>
+                    ))}
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
           </div>
 
           {/* RIGHT SIDE - Image Panel */}

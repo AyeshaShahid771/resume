@@ -19,7 +19,7 @@ export default function StaticHero() {
       <div className="absolute inset-0 bg-black/40" />
 
       {/* Content */}
-      <div className="pointer-events-none absolute inset-0 z-10 overflow-hidden text-white flex flex-col items-center justify-start text-center px-4 md:px-6 pt-[68vh] md:pt-[48vh]">
+      <div className="pointer-events-none absolute inset-0 z-10 text-white flex flex-col items-center justify-between text-center px-4 md:px-6 pt-[60vh] md:pt-[48vh] pb-8 md:pb-4">
         <div className="space-y-4 max-w-5xl">
           <motion.h1
             initial={{ y: 40, opacity: 0, filter: "blur(8px)" }}
@@ -49,44 +49,64 @@ export default function StaticHero() {
             transition={{ duration: 1, delay: 0.4, ease: "circOut" }}
             className="h-[1px] w-12 bg-[#64b4ff]/60 mx-auto mt-4 mb-6 origin-center"
           />
-
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.6 }}
             className="font-playfair italic text-white/70 text-xs md:text-base tracking-wide max-w-xl mx-auto"
           >
-            &quot;Crafting intelligent voice agents & RAG-powered
-            chatbots.&quot;
+            &quot;Crafting intelligent voice agents & RAG-powered chatbots.&quot;
           </motion.p>
         </div>
-      </div>
 
-      {/* Scroll Indicator */}
-      <motion.div
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
-        className="absolute bottom-2 md:bottom-4 left-1/2 -translate-x-1/2 z-20"
-      >
-        <div className="flex flex-col items-center gap-2">
-          <span className="text-xs text-white/50 uppercase tracking-widest font-syne">
-            Scroll
-          </span>
-          <svg
-            className="w-5 h-5 text-white/50"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
+        {/* Responsive Indicator */}
+        <div className="flex flex-col items-center z-20">
+          {/* Desktop Indicator - Simple & Elegant */}
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            className="hidden md:flex flex-col items-center gap-2"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M19 14l-7 7m0 0l-7-7m7 7V3"
-            />
-          </svg>
+            <span className="text-[10px] text-white/40 uppercase tracking-[0.3em] font-syne">
+              Scroll
+            </span>
+            <svg
+              className="w-4 h-4 text-white/30"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={1.5}
+                d="M19 14l-7 7m0 0l-7-7m7 7V3"
+              />
+            </svg>
+          </motion.div>
+
+          {/* Mobile Indicator - "Something Different": Animated Gesture Hint */}
+          <div className="md:hidden flex flex-col items-center gap-4">
+            <div className="relative w-[1px] h-12 bg-white/10 overflow-hidden">
+              <motion.div
+                animate={{ 
+                  y: ["-100%", "100%"],
+                  opacity: [0, 1, 0] 
+                }}
+                transition={{ 
+                  duration: 1.5, 
+                  repeat: Infinity, 
+                  ease: "easeInOut" 
+                }}
+                className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-transparent via-blue-400 to-transparent"
+              />
+            </div>
+            <span className="text-[8px] text-white/20 uppercase tracking-[0.4em] font-syne">
+              Swipe to Explore
+            </span>
+          </div>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }

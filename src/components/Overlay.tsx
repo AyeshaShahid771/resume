@@ -10,7 +10,6 @@ export default function Overlay({ scrollTarget }: OverlayProps) {
   const { scrollYProgress } = useScroll({
     target: scrollTarget,
     offset: ["start start", "end end"],
-    layout: "position", // Ensures proper scroll calculation on prod
   });
 
   // Phase 1: Editorial Hero (0% to 28%)

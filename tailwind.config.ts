@@ -12,9 +12,14 @@ const config: Config = {
         "border-beam": {
           "100%": { transform: "translateX(100%)" },
         },
+        "pulse-subtle": {
+          "0%, 100%": { opacity: "0.3" },
+          "50%": { opacity: "0.4" },
+        },
       },
       animation: {
         "border-beam": "border-beam 2s linear infinite",
+        "pulse-subtle": "pulse-subtle 12s ease-in-out infinite",
       },
       fontFamily: {
         playfair: ["var(--font-playfair)", "serif"],
@@ -28,12 +33,12 @@ const config: Config = {
     },
   },
   plugins: [
-    function({ addUtilities }: any) {
+    function ({ addUtilities }: any) {
       addUtilities({
-        '.perspective-1000': {
-          'perspective': '1000px',
+        ".perspective-1000": {
+          perspective: "1000px",
         },
-      })
+      });
     },
   ],
 };
